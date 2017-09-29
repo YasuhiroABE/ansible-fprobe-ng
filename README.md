@@ -20,16 +20,16 @@ Role Variables
 
 ### Defaults
 * fprobe_default_config_file: '/etc/default/fprobe'
-This file should contains lines beggning with INTERFACE or FLOW_COLLECTOR.
+  * This file should contains lines beggning with INTERFACE and FLOW_COLLECTOR.
 
 * fprobe_collector_ipaddr: '127.0.0.1'
-Either iP address or hostname is the destination address of FLOW collector
+  * Either iP address or hostname for the destination address of FLOW collector
 
 * fprobe_collector_port: '2055'
-The destination port number of FLOW collector
+  * The destination port number of FLOW collector
 
 * fprobe_probe_ethdev: 'eth0'
-Local network device name, such as 'eth0' and 'enp1s0'
+  * Local network device name, such as 'eth0' and 'enp1s0'
 
 Dependencies
 ------------
@@ -38,8 +38,6 @@ N/A
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
       vars:
