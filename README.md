@@ -29,7 +29,7 @@ Role Variables
   * The destination port number of FLOW collector
 
 * fprobe_probe_ethdev: 'eth0'
-  * Local network device name, such as 'eth0' and 'enp1s0'
+  * Local network device name, such as 'eth0' and 'any'
 
 Dependencies
 ------------
@@ -41,7 +41,7 @@ Example Playbook
 
     - hosts: all
       vars:
-        - fprobe_service_ethdev: 'enp1s0'
+        - fprobe_probe_ethdev: 'enp1s0'
       roles:
         - yasuhiroabe.fprobe-ng
 
