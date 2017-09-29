@@ -1,0 +1,4 @@
+---
+# handlers file for fprobe-ng
+- name: restart fprobe
+  systemd: state=restarted daemon_reload=yes name=fprobe

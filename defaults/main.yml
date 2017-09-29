@@ -1,0 +1,7 @@
+---
+# defaults file for fprobe-ng
+fprobe_default_config_file: '/etc/default/fprobe'
+fprobe_collector_ipaddr: '127.0.0.1'
+fprobe_collector_port: '2055'
+fprobe_probe_ethdev: 'eth0'
+

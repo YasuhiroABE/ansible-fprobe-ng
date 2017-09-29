@@ -1,0 +1,35 @@
+---
+# tasks for fprobe-ng
+
+- name: install server packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=1200
+  with_items:
+    - fprobe-ng
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+  
+- name: install essential packages for this task
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=1200
+  with_items:
+    - fprobe-ng
+  register: result
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+  
+- name: modify FLOW_COLLECTOR on /etc/default/fprobe file
+  lineinfile: >
+    path={{ fprobe_default_config_file }}
+    regexp="^FLOW_COLLECTOR="
+    line='FLOW_COLLECTOR="{{ fprobe_collector_ipaddr }}:{{ fprobe_collector_port }}"'
+  register: result
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+- name: modify INTERFACE on /etc/default/fprobe file
+  lineinfile: >
+    path={{ fprobe_default_config_file }}
+    regexp="^INTERFACE="
+    line='INTERFACE="{{ fprobe_probe_ethdev }}"'
+  register: result
+  notify:
+    - restart fprobe
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+ 
