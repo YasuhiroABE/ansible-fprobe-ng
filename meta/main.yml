@@ -23,10 +23,10 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-      - 9
+      - stretch
   - name: Ubuntu
     versions:
-      - 16.04
+      - xenial
 
   galaxy_tags:
     - System
