@@ -32,4 +32,11 @@
     - restart fprobe
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
- 
+ - name: enable fprobe service
+  systemd:
+    name: frobe
+    state: started
+    enabled: true
+  notify:
+    - restart fprobe.service
+  register: result
