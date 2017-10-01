@@ -1,4 +1,14 @@
 ---
 # handlers file for fprobe-ng
-- name: restart fprobe
-  systemd: state=restarted daemon_reload=yes name=fprobe
+- name: killall fprobe.service
+  shell: killall "{{ nfcapd_fprobe_bin_filepath }}"
+  ignore_errors: yes
+  notify:
+    - fprobe wait until port close
+
+- name: fprobe wait until port close
+  wait_for: host="{{ nfcapd_listen_address }}" port="{{ nfcapd_port }}" delay=15 state="started" timeout="60"
+
+- name: restart fprobe.service
+  systemd: state=started name=fprobe
+

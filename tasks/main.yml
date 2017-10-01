@@ -5,6 +5,7 @@
   apt: pkg={{ item }} update_cache=yes cache_valid_time=1200
   with_items:
     - fprobe-ng
+    - psmisc
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
   
 - name: install essential packages for this task
@@ -29,7 +30,8 @@
     line='INTERFACE="{{ fprobe_probe_ethdev }}"'
   register: result
   notify:
-    - restart fprobe
+    - killall fprobe.service
+    - restart fprobe.service
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
 - name: enable fprobe service
@@ -38,5 +40,6 @@
     state: started
     enabled: true
   notify:
+    - killall fprobe.service
     - restart fprobe.service
   register: result
